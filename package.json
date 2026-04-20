@@ -1,0 +1,44 @@
+{
+  "name": "@ola-turmo/paperclip-plugin-agentmail",
+  "version": "0.1.0",
+  "private": false,
+  "type": "module",
+  "description": "Paperclip company-scoped AgentMail plugin with inbox UI and agent tools for signup and email workflows.",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Ola-Turmo/paperclip-plugin-agentmail.git"
+  },
+  "license": "MIT",
+  "files": [
+    "dist",
+    "README.md"
+  ],
+  "scripts": {
+    "plugin:build": "node ./esbuild.config.mjs",
+    "plugin:dev": "node ./esbuild.config.mjs --watch",
+    "plugin:dev:ui": "paperclip-plugin-dev-server --root . --ui-dir dist/ui --port 4177",
+    "plugin:typecheck": "tsc --noEmit -p ./tsconfig.plugin.json",
+    "test": "vitest run",
+    "verify": "npm run plugin:typecheck && npm test && npm run plugin:build"
+  },
+  "paperclipPlugin": {
+    "manifest": "./dist/manifest.js",
+    "worker": "./dist/worker.js",
+    "ui": "./dist/ui/"
+  },
+  "dependencies": {
+    "agentmail": "^0.4.19"
+  },
+  "devDependencies": {
+    "@paperclipai/plugin-sdk": "^2026.416.0",
+    "@types/node": "^24.6.0",
+    "@types/react": "^19.0.8",
+    "esbuild": "^0.27.3",
+    "tslib": "^2.8.1",
+    "typescript": "^5.7.3",
+    "vitest": "^3.2.4"
+  },
+  "peerDependencies": {
+    "react": ">=18"
+  }
+}
