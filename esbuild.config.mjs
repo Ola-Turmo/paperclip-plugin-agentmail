@@ -6,7 +6,9 @@ const watch = process.argv.includes("--watch");
 
 presets.esbuild.worker.external = [
   ...(presets.esbuild.worker.external ?? []),
+  "agentmail",
   "@x402/fetch",
+  "ws",
 ];
 
 const workerCtx = await esbuild.context(presets.esbuild.worker);
