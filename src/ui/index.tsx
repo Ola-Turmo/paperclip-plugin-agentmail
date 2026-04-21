@@ -40,10 +40,27 @@ export function DashboardWidget(props: PluginWidgetProps) {
   const companyId = context.companyId;
   const overview = usePluginData<CompanyMailOverview>("companyMailOverview", companyId ? { companyId } : {});
   if (!companyId) return <div>Open inside a company to use AgentMail.</div>;
-  if (overview.loading) return <div>Loading AgentMail…</div>;
+  if (overview.loading) return <div>Loading AgentMail...</div>;
   if (overview.error) return <div>AgentMail error: {overview.error.message}</div>;
   const data = overview.data;
   if (!data) return <div>No AgentMail data yet.</div>;
+
+  if (!data.configured || !data.pod) {
+    return (
+      <div style={{ display: "grid", gap: 8 }}>
+        <strong>AgentMail</strong>
+        <div style={{ fontSize: 12, textTransform: "uppercase", letterSpacing: "0.08em", color: "#64748b" }}>
+          Needs setup
+        </div>
+        <div style={{ color: "#475569", fontSize: 13 }}>
+          Add the company AgentMail secret and create its pod before inboxes and signup flows become available.
+        </div>
+        <div style={{ fontSize: 12, color: "#64748b" }}>
+          {data.inboxes.length} inbox{data.inboxes.length === 1 ? "" : "es"} reserved
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div style={{ display: "grid", gap: 8 }}>
