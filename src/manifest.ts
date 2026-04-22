@@ -9,8 +9,10 @@ const manifest: PaperclipPluginManifestV1 = {
   author: "Ola Turmo",
   categories: ["connector", "automation", "ui"],
   capabilities: [
+    "companies.read",
     "plugin.state.read",
     "plugin.state.write",
+    "agent.tools.register",
     "ui.dashboardWidget.register",
     "ui.page.register",
     "secrets.read-ref"
